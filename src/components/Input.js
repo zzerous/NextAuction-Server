@@ -12,6 +12,7 @@ const Input = ({
   onChange,
   placeholder,
   err,
+  final,
   readOnly,
 }) => (
   <div className={cx('Input', className)}>
@@ -32,6 +33,7 @@ const Input = ({
       className={cx(
         'Input__input',
         { 'Input__input--err': err },
+        { 'Input__input--final': final },
       )}
       autoComplete="off"
     />

@@ -2,10 +2,10 @@
   "presets": [
     [
       "@babel/preset-env",
-      {
-        "modules": false,
-        "useBuiltIns": "entry"
-      }
+      //{
+      //  "modules": false,
+      //  "useBuiltIns": "entry"
+      //}
     ],
     "@babel/preset-react",
   ],

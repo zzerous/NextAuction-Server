@@ -1,0 +1,58 @@
+.UserAuctionFeed {
+    position: relative;
+    width: 100%;
+    min-height: 20%;
+    padding: 25px 0;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    @include breakpoint("max-card") {
+      padding: 40px 0;
+    }
+  }
+  
+  .UserFeedItem {
+    position: relative;
+    width: 15%;
+    max-width: 500px;
+    margin-bottom: 60px;
+    margin-left:40px;
+    cursor: pointer;
+    &:last-child { margin-bottom: 50; }
+    @include cardBox();
+    @include breakpoint("max-card") {
+      margin-bottom: 20px;
+      margin-right: 50px;
+    }
+  }
+  
+  .FeedItem__image {
+    width: 100%;
+    img { width: 100%; height: 160px;}
+    padding: 24px 24px 24px 24px; 
+    margin: 0px;
+    background-color: rgb(220,230,240);
+  
+  }
+  
+  .FeedItem__info {
+    position: relative;
+    padding: 24px 24px 24px 24px;
+    align-content: center;
+    &:hover { text-decoration: underline; }
+  }
+  
+  
+  .Feed__empty {
+    font-size: 20px;
+    font-weight: bold;
+    @include fixed-center();
+  }
+
+  .Feed__Desc {
+    font-size: 20px;
+    font-weight: bold;
+    //padding: 50px 24px 24px 24px;
+    margin: 25px 0px 0px 50px ; 
+    color: $brown-grey;
+  }

@@ -5,10 +5,15 @@
  */
 import Caver from 'caver-js'
 
-const BAOBAB_TESTNET_RPC_URL = 'https://api.baobab.klaytn.net:8651/'
+// const provider = null;
 
-const rpcURL = BAOBAB_TESTNET_RPC_URL
+// if(typeof window !== 'undefined'){
+//   provider = window['klaytn'];
+// }
 
-const caver = new Caver(rpcURL)
+
+// const caver = new Caver(provider)
+
+const caver = new Caver(window.klaytn);
 
 export default caver

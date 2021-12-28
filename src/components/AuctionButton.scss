@@ -1,0 +1,24 @@
+.AuctionButton {
+    width: 108px;
+    height: 54px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 5;
+    color: $white;
+    font-weight: bold;
+    background: $light-blue;
+    border-radius: 1rem;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    &:hover,
+    &:active {
+      background-color: $dark-blue;
+      color: $white;
+    }
+  
+    @include breakpoint("max-card") {
+      right: 24px;
+      bottom: 24px;
+    }
+  }

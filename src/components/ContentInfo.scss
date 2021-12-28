@@ -1,0 +1,22 @@
+.ContentInfo__name {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+  @include textEllipsis();
+}
+
+.ContentInfo__issueDate {
+  display: block;
+  font-size: 12px;
+  color: $middle-grey;
+  @include textEllipsis();
+}
+
+.ContentInfo__state {
+  display: block;
+  margin-top:5px;
+  text-align: right;
+  font-size: 12px;
+  color: $alert-red;
+  @include textEllipsis();
+}

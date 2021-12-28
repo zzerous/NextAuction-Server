@@ -61,8 +61,12 @@ module.exports = merge(baseConfig, {
       DEV: false,
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.version': JSON.stringify(gitRevisionPlugin.commithash().slice(0, 7)), // TODO: delete when real
-      DEPLOYED_ADDRESS: JSON.stringify(fs.readFileSync('deployedAddress', 'utf8').replace(/\n|\r/g, "")),
-      DEPLOYED_ABI: fs.existsSync('deployedABI') && fs.readFileSync('deployedABI', 'utf8'),
+      DEPLOYED_ADDRESS: JSON.stringify(fs.readFileSync('deployedAddressContentManagement', 'utf8').replace(/\n|\r/g, "")),
+      DEPLOYED_ABI: fs.existsSync('deployedABIContentManagement') && fs.readFileSync('deployedABIContentManagement', 'utf8'),
+      DEPLOYED_ADDRESS_NFT: JSON.stringify(fs.readFileSync('deployedAddressNFTManagement', 'utf8').replace(/\n|\r/g, "")),
+      DEPLOYED_ABI_NFT: fs.existsSync('deployedABINFTManagement') && fs.readFileSync('deployedABINFTManagement', 'utf8'),
+      DEPLOYED_ADDRESS_AUCTION: JSON.stringify(fs.readFileSync('deployedAddressAuctionManagement', 'utf8').replace(/\n|\r/g, "")),
+      DEPLOYED_ABI_AUCTION: fs.existsSync('deployedABIAuctionManagement') && fs.readFileSync('deployedABIAuctionManagement', 'utf8'),
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

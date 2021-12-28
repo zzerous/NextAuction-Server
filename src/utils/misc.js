@@ -1,5 +1,3 @@
-// import Compressor from 'compressorjs'
-
 const isArray = (obj) => obj instanceof Array
 
 const renameKeys = (obj, newKeys) => Object
@@ -9,34 +7,35 @@ const renameKeys = (obj, newKeys) => Object
     ...{ [newKeys[key] || key]: obj[key] },
   }), {})
 
-export const last = (array) => {
-  const length = array == null ? 0 : array.length
-  return length ? array[length - 1] : undefined
-}
-
 export const feedParser = (feed) => {
-  const photoKeys = {
-    0: 'id',
-    1: 'ownerHistory',
-    2: 'data',
-    3: 'name',
-    4: 'location',
-    5: 'caption',
-    6: 'timestamp',
+  const contentKeys = {
+    0: 'contentName',
+    1: 'fileType',
+    2: 'contentSize',
+    3: 'contentHash',
+    4: 'contentType',
+    5: 'contentDesc',
+    6: 'accessLocation',
+    7: 'createTime',
+    8: 'issuer',
+    9: 'audience',
+    10: 'endpoint',
+    11: 'signature'
   }
 
   /**
-   * 1. If feed is one object of photo,
-   * rename just one photo object's keys
+   * 1. If feed is one object of file,
+   * rename just one file object's keys
    */
   if (!isArray(feed)) {
-    return renameKeys(feed, photoKeys)
+    return renameKeys(feed, contentKeys)
   }
   /**
-   * 2. If feed is array of photos,
-   * Iterate feed array to rename all of photo objects' keys
+   * 2. If feed is array of files,
+   * Iterate feed array to rename all of file objects' keys
    */
-  const parsedFeed = feed.map((photo) => renameKeys(photo, photoKeys))
 
+  const parsedFeed = feed.map((file) => renameKeys(file, contentKeys))
   return parsedFeed
+  
 }

@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
+import ui from 'utils/ui'
 import Loading from 'components/Loading'
-import PhotoHeader from 'components/PhotoHeader'
-import PhotoInfo from 'components/PhotoInfo'
-import CopyrightInfo from 'components/CopyrightInfo'
-import TransferOwnershipButton from 'components/TransferOwnershipButton'
-import { drawImageFromBytes} from 'utils/imageUtils'
-import { last } from 'utils/misc'
+import ContentInfo from 'components/ContentInfo'
+import DownloadContent from 'components/DownloadContent'
 
-import * as photoActions from 'redux/actions/photos'
+import * as contentActions from 'redux/actions/contents'
 
 import './Feed.scss'
 
@@ -18,9 +14,9 @@ class Feed extends Component {
     super(props)
     this.state = {
       isLoading: !props.feed,
+      byteSize: null,
     }
   }
-
   static getDerivedStateFromProps = (nextProps, prevState) => {
     const isUpdatedFeed = (nextProps.feed !== prevState.feed) && (nextProps.feed !== null)
     if (isUpdatedFeed) {
@@ -31,67 +27,84 @@ class Feed extends Component {
 
   componentDidMount() {
     const { feed, getFeed } = this.props
-    if (!feed) getFeed()
+    if (!feed) 
+      getFeed()
   }
 
   render() {
-    const { feed, userAddress } = this.props
-
+    const { feed } = this.props
     if (this.state.isLoading) return <Loading />
-
     return (
       <div className="Feed">
         {feed.length !== 0
           ? feed.map(({
-            id,
-            ownerHistory,
-            data,
-            name,
-            location,
-            caption,
-            timestamp,
-          }) => {
-            const originalOwner = ownerHistory[0]
-            const currentOwner = last(ownerHistory)
-            const imageUrl = drawImageFromBytes(data)
-            const issueDate = moment(timestamp * 1000).fromNow()
-            return (
-              <div className="FeedPhoto" key={id}>
-                <PhotoHeader
-                  currentOwner={currentOwner}
-                  location={location}
-                />
-                <div className="FeedPhoto__image">
-                  <img src={imageUrl} alt={name} />
-                </div>
-                <div className="FeedPhoto__info">
-                  <PhotoInfo
-                    name={name}
-                    issueDate={issueDate}
-                    caption={caption}
-                  />
-                  <CopyrightInfo
-                    className="FeedPhoto__copyrightInfo"
-                    id={id}
-                    issueDate={issueDate}
-                    originalOwner={originalOwner}
-                    currentOwner={currentOwner}
-                  />
-                  {
-                    userAddress === currentOwner && (
-                      <TransferOwnershipButton
-                        className="FeedPhoto__transferOwnership"
-                        id={id}
-                        issueDate={issueDate}
-                        currentOwner={currentOwner}
+              contentName,
+              contentSize,
+              contentHash,
+              contentType,
+              contentDesc,
+              accessLocation,
+              createTime,
+              endpoint,
+            }) => {
+              // bytes to KB, MB, GB
+              const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+              const i = parseInt(Math.floor(Math.log(contentSize) / Math.log(1024)));
+              const byteSize = Math.round(contentSize / Math.pow(1024, i), 2) + ' ' + sizes[i]
+              
+              let SRC = "";
+              if (contentType === "IMAGE"){
+                SRC = "/images/IMG.png";
+              }
+              else if (contentType === "VIDEO"){
+                SRC = "/images/MP4.png";
+              }
+              else if (contentType === "MUSIC"){
+                SRC = "/images/MP3.png";
+              }
+              else if (contentType === "TEXT"){
+                SRC = "/images/TXT.png";
+              }
+              else if (contentType === "COMPRESS"){
+                SRC = "/images/ZIP.png";
+              }
+              else{
+                SRC = "/images/file.png";
+              }
+              return (
+                <div 
+                  className="FeedItem" 
+                  key={contentHash}
+                  onClick={() => ui.showModal({
+                    header: 'Download Certification',
+                    content: (
+                      <DownloadContent 
+                        cName={contentName}
+                        cSize={byteSize}
+                        cHash={contentHash}
+                        cType={contentType}
+                        cDesc={contentDesc}
+                        accessLocation={accessLocation}
+                        createdTime={createTime}
+                        endPoint={endpoint}
                       />
-                    )
-                  }
+                    ),
+                  })}
+                >
+                <div className="FeedItem__image">
+                  <img 
+                  src={SRC} alt="image" />
+                </div>
+                <div className="FeedItem__info">
+                  <ContentInfo
+                    name={contentName}
+                    issueDate={createTime}
+                  />
                 </div>
               </div>
             )
           })
-          : <span className="Feed__empty">No Photo :D</span>
+          : <span className="Feed__empty">No Contents :D</span>
         }
       </div>
     )
@@ -99,12 +112,14 @@ class Feed extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  feed: state.photos.feed,
-  userAddress: state.auth.address,
+  feed: state.contents.feed,
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getFeed: () => dispatch(photoActions.getFeed()),
+  getFeed: () => 
+  dispatch(contentActions.getFeed()),
+  
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed)

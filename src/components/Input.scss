@@ -7,7 +7,7 @@
   font-size: 12px;
   font-weight: bold;
   color: $brown-grey;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .Input__input {
@@ -16,8 +16,11 @@
   border: 1px solid $light-grey;
   padding: 22px 24px;
   border-radius: 5px;
+  margin-bottom: 12px;
+  
 
   &::placeholder { color: $middle-grey; }
+  &--final { color: $alert-red; font-weight: bold;}
   &--err { border-color: $alert-red; }
 }
 

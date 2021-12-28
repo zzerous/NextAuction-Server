@@ -19,6 +19,10 @@ module.exports = {
       },
     ],
   },
+  node:{
+    fs: 'empty',
+    net: 'empty',
+  },
   resolve: {
     modules: [
       'node_modules',

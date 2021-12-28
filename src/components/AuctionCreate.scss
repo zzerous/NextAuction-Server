@@ -1,0 +1,25 @@
+
+.DownloadContent__infoName,
+.DownloadContent__infoType,
+.DownloadContent__infoSize,
+.DownloadContent__infoLocation,
+.DownloadContent__infoTime {
+  margin-bottom: 10px;
+}
+
+.DownloadTest__infoName,
+.DownloadTest__infoType,
+.DownloadTest__infoSize,
+.DownloadTest__infoLocation,
+.DownloadTest__infoTime {
+  margin-bottom: 10px;
+}
+
+.DownloadContent_delete {
+
+  &:hover,
+  &:active {
+    background-color: red;
+    color: $white;
+  }
+}

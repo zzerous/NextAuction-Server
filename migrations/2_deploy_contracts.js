@@ -1,27 +1,67 @@
-const Klaystagram = artifacts.require('./Klaystagram.sol')
+const ContentManagement = artifacts.require('./ContentManagement.sol')
+const NFTManagement = artifacts.require('./NFTManagement.sol')
+const AuctionManagement = artifacts.require('./AuctionManagement.sol')
 const fs = require('fs')
 
 module.exports = function (deployer) {
-  deployer.deploy(Klaystagram)
+  deployer.deploy(ContentManagement)
     .then(() => {
-    if (Klaystagram._json) {
+    if (ContentManagement._json) {
       // 1. Record recently deployed contract's abi file to 'deployedABI'
       fs.writeFile(
-        'deployedABI',
-        JSON.stringify(Klaystagram._json.abi, 2),
+        'deployedABIContentManagement',
+        JSON.stringify(ContentManagement._json.abi, 2),
         (err) => {
           if (err) throw err
-          console.log(`The abi of ${Klaystagram._json.contractName} is recorded on deployedABI file`)
+          console.log(`The abi of ${ContentManagement._json.contractName} is recorded on deployedABI file`)
         })
     }
 
     // 2. Record recently deployed contract's address to 'deployedAddress'
     fs.writeFile(
-      'deployedAddress',
-      Klaystagram.address,
+      'deployedAddressContentManagement',
+      ContentManagement.address,
       (err) => {
         if (err) throw err
-        console.log(`The deployed contract address * ${Klaystagram.address} * is recorded on deployedAddress file`)
+        console.log(`The deployed contract address * ${ContentManagement.address} * is recorded on deployedAddress file`)
     })
-  })
+  });
+  deployer.deploy(NFTManagement, "TEST Auction NFT", "TEST")
+    .then(() => {
+    if (NFTManagement._json) {
+      fs.writeFile(
+        'deployedABINFTManagement',
+        JSON.stringify(NFTManagement._json.abi, 2),
+        (err) => {
+          if (err) throw err
+          console.log(`The abi of ${NFTManagement._json.contractName} is recorded on deployedABI file`)
+        })
+    }
+    fs.writeFile(
+      'deployedAddressNFTManagement',
+      NFTManagement.address,
+      (err) => {
+        if (err) throw err
+        console.log(`The deployed contract address * ${NFTManagement.address} * is recorded on deployedAddress file`)
+    })
+  });
+  deployer.deploy(AuctionManagement)
+    .then(() => {
+    if (AuctionManagement._json) {
+      fs.writeFile(
+        'deployedABIAuctionManagement',
+        JSON.stringify(AuctionManagement._json.abi, 2),
+        (err) => {
+          if (err) throw err
+          console.log(`The abi of ${AuctionManagement._json.contractName} is recorded on deployedABI file`)
+        })
+    }
+    fs.writeFile(
+      'deployedAddressAuctionManagement',
+      AuctionManagement.address,
+      (err) => {
+        if (err) throw err
+        console.log(`The deployed contract address * ${AuctionManagement.address} * is recorded on deployedAddress file`)
+    })
+  });
 }

@@ -9,7 +9,7 @@
 }
 
 .Nav__inner {
-  max-width: $max-page-width;
+  max-width: $max-page-width+200px;
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -28,7 +28,8 @@
   justify-content: flex-end;
 }
 
-.Nav__wallet, .Nav__logout {
+
+.Nav__wallet, .Nav__logout, .Nav__user {
   font-size: 14px;
   line-height: 24px;
   color: $brownish-grey;
@@ -63,13 +64,32 @@
   background-image: url("/images/icon-logout.png");
 }
 
-.Nav__menu {
-  // position: relative;
-  // width: 24px;
-  // height: 24px;
-  // overflow: hidden;
-  // margin-left: 30px;
-  // cursor: pointer;
+.Nav__user::before {
+  background-image: url("/images/user.png");
+}
 
-  // img { width: 100%; }
+.Nav__network {
+  padding: 2px 15px;
+  border: 1px solid $dark-brown;
+  border-radius: 12px;
+  font-size: 12px;
+  color: $dark-brown;
+  text-align: center;
+  margin-left: 36px;
+
+  &--loading {
+    color: $brown-grey;
+    border-color: $brown-grey;
+  }
+
+  &--error {
+    color: $alert-red;
+    border-color: $alert-red;
+  }
+
+  span {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 10px;
+  }
 }

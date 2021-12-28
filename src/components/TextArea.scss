@@ -1,0 +1,32 @@
+.TextArea {
+    position: relative;
+  }
+  
+  .TextArea__label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: $brown-grey;
+    margin-bottom: 2px;
+  }
+  
+  .TextArea__input {
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid $light-grey;
+    padding: 12px 12px;
+    border-radius: 5px;
+    resize: none;
+  
+    &::placeholder { color: $middle-grey; }
+    &--err { border-color: $alert-red; }
+  }
+  
+  .TextArea__err {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    color: $alert-red;
+  }
+  

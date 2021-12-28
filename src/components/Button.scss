@@ -9,10 +9,18 @@
   font-weight: bold;
   padding: 23px;
   cursor: pointer;
-
   &:hover,
   &:active {
-    background-color: $dark-brown;
+    background-color: $light-blue;
+    color: $white;
+  }
+
+}  
+
+.Button__delete {
+  &:hover,
+  &:active {
+    background-color: rgb(150,0,0);
     color: $white;
   }
 }

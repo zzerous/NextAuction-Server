@@ -1,71 +1,94 @@
-import React from 'react'
+import React,{Component}  from 'react'
 import { connect } from 'react-redux'
-
-import IconButton from 'components/IconButton'
 import WalletInfo from 'components/WalletInfo'
+import UploadTest from 'components/UploadTest'
+import DownloadTest from 'components/DownloadTest'
 import ui from 'utils/ui'
+import cx from 'classnames'
+import {isNull} from 'lodash'
+import networks from 'constants/networks'
 
-import * as authActions from 'redux/actions/auth'
+import * as loginActions from 'redux/actions/login'
+import * as aucActions from 'redux/actions/auctions'
 
 import './Nav.scss'
 
-const Nav = ({ logout, address }) => (
-  <header className="Nav">
-    <div className="Nav__inner">
-      <h1 className="Nav__logo">
-        <img
-          src="images/logo-klaystagram.png"
-          alt="Klaystagram"
-        />
-      </h1>
-      <div className="Nav__menus">
-        <button
-          className="Nav__wallet"
-          alt="Wallet info"
-          onClick={() => ui.showModal({
-            header: 'Wallet Info',
-            content: (
-              <WalletInfo address={address} />
-            ),
-          })}
-        >
-          Wallet
-        </button>
-        <button
-          className="Nav__logout"
-          alt="Logout"
-          onClick={logout}
-        >
-          Logout
-        </button>
-        {/* <IconButton
-          className="Nav__menu"
-          icon="icon-wallet.svg"
-          alt="Wallet info"
-          onClick={() => ui.showModal({
-            header: 'Wallet Info',
-            content: (
-              <WalletInfo address={address} />
-            ),
-          })}
-        />
-        <IconButton
-          className="Nav__menu"
-          icon="icon-logout.png"
-          alt="Logout"
-          onClick={logout}
-        /> */}
-      </div>
-    </div>
-  </header>
-)
+class Nav extends Component {
+  state={
+    network:null,
+  }
+  componentDidMount(){
+    this.setNetworkInfo()
+  }
 
-const mapStateToProps = (state) => ({
-  address: state.auth.address,
-})
+  setNetworkInfo = () => {
+    const { klaytn } = window
+    if (klaytn === undefined) return
+
+    this.setState({ network: klaytn.networkVersion })
+    klaytn.on('networkChanged', () => this.setNetworkInfo(klaytn.networkVersion))
+  }
+
+  render(){
+    const { address, logout, title, userAuction } = this.props
+    const { network } = this.state
+    console.log(this.props)
+    return(
+      <header className="Nav">
+        <div className="Nav__inner">
+          <h1 className="Nav__logo">
+            {title}
+          </h1>
+          <div className="Nav__menus">
+
+            <button
+              className="Nav__user"
+              alt="User Auction"
+              onClick={userAuction}
+            
+            >
+              User Auction
+            </button>
+
+            <button
+              className="Nav__wallet"
+              alt="Wallet info"
+              onClick={() => ui.showModal({
+                header: 'Wallet Info',
+                content: (
+                  <WalletInfo address={address}/>
+                ),
+              })}
+            >
+              Wallet
+            </button>
+
+            <button
+              className="Nav__logout"
+              alt="Logout"
+              onClick={logout}
+            >
+              Logout
+            </button>
+
+            <div className={cx('Nav__network', {
+              'Nav__network--error': isNull(network),
+              'Nav__network--loading': network === 'loading',
+            })}>
+            <span>&#9679;</span>
+            {isNull(network) ? 'No connection' : networks[network]}
+            </div>
+          </div>
+        </div>
+      </header>
+    )
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(authActions.logout()),
+  logout: () => dispatch(loginActions.logout()),
+
+  userAuction: () => dispatch(aucActions.activeUserAuction()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default connect(null, mapDispatchToProps)(Nav)

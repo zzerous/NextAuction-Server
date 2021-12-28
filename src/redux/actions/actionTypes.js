@@ -1,12 +1,21 @@
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
-export const INTEGRATE_WALLET = 'INTEGRATE_WALLET'
+export const SET_ACCOUNT = 'SET_ACCOUNT'
+//export const INTEGRATE_WALLET = 'INTEGRATE_WALLET'
 export const REMOVE_WALLET = 'REMOVE_WALLET'
 
 export const SHOW_MODAL = 'SHOW_MODAL'
 export const HIDE_MODAL = 'HIDE_MODAL'
-export const SHOW_TOAST = 'SHOW_TOAST'
-export const HIDE_TOAST = 'HIDE_TOAST'
 
 export const SET_FEED = 'SET_FEED'
+export const REQ_CREDENTIAL = 'REQ_CREDENTIAL'
+export const REQ_ACCESSTOKEN = 'REQ_ACCESSTOKEN'
+export const UPLOAD_CONTENT = 'UPLOAD_CONTENT'
+export const DOWNLOAD_CONTENT = 'DOWNLOAD_CONTENT'
+
+export const ACTIVE_USER_AUCTION = 'ACTIVE_USER_AUCTION'
+export const FINALIZE_USER_AUCTION = 'FINALIZE_USER_AUCTION'
+export const SET_AUCFEED = 'SET_AUCFEED'
+export const SET_USERAUC = 'SET_USERAUC'
+
 

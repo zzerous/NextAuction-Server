@@ -1,3 +1,35 @@
+.LoginForm {
+  width: 100%;
+  max-width: $max-card-width;
+  padding: 72px 60px 10px;
+  @include cardBox();
+  @include absolute-center();
+  @include breakpoint("max-card") {
+    background-color: unset;
+    border: unset;
+    padding: 40px 40px 20px;
+  }
+}
+
+.LoginForm__h2 {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: normal;
+  color: $brown-grey;
+  line-height: 1.4;
+  margin-bottom: 30px;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    margin-bottom: -18px;
+    margin-left: -100%;
+    transform: translateX(100%);
+    width: 16px;
+    height: 2px;
+    background-color: $light-grey;
+  }
+}
 .LoginForm__input {
   margin-bottom: 16px;
   & input {

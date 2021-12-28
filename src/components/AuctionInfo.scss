@@ -1,0 +1,19 @@
+.AuctionInfo__infoName,
+.AuctionInfo__infoEXP,
+.AuctionInfo__infoMIN,
+.AuctionInfo__description,
+.AuctionInfo__contentCreator,
+.AuctionInfo__contentOwner,
+.AuctionInfo__infoTime {
+  margin-bottom: 10px;
+}
+
+.AuctionInfo__image {
+  width: 100%;
+  img { width: 100%; }
+  padding: 24px 24px 24px 24px; 
+  margin: 0px;
+  background-color: rgb(255,255,255);
+  break-after: column;
+
+}

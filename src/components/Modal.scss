@@ -12,11 +12,10 @@
   @include fixed-center();
   @include cardBox();
   width: 100%;
-  max-width: $max-card-width;
-
-  @include breakpoint("max-card") {
-    width: 95%;
-  }
+  max-width: $info-card-width;
+  // @include breakpoint("max-card") {
+  //   width: 95%;
+  // }
 }
 
 .Modal__header {
@@ -29,7 +28,11 @@
 
 .Modal__body {
   @include clear-both();
-  padding: 40px 24px;
+  padding: 24px 24px;
+  column-rule: 1px solid $light-grey;
+  column-gap: 50px;
+  column-count:2;
+  
 }
 
 .Modal__close {

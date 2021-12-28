@@ -1,0 +1,19 @@
+.ItemRegButton {
+    width: 64px;
+    height: 64px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 5;
+    color: rgb(255,255,255);
+    font-weight: bold;
+    background: rgb(79,71,62);
+    border-radius: 50%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+  
+    @include breakpoint("max-card") {
+      right: 24px;
+      bottom: 24px;
+    }
+  }
