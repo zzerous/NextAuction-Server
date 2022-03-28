@@ -5,3 +5,4 @@
 3. Run `npm install`to install node packages
 4. Run `npm run local`
 5. App should be running in https://localhost:8888
+6. (node -v : v10.16.0)
